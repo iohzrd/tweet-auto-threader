@@ -75,7 +75,6 @@ const replace_list = {
     "over-time ": "OT ",
     "overtime ": "OT ",
     "payed time off ": "PTO ",
-    "people of color ": "POC ",
     "plus ": "+ ",
     "point of view ": "POV ",
     "police department ": "PD ",
