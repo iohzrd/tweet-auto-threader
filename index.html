@@ -52,7 +52,7 @@
     const replace = function (input) {
         for (const key in replace_list) {
             const value = replace_list[key];
-            input = input.toLowerCase().split(key).join(value);
+            input = input.split(key).join(value);
         }
         return input;
     }
