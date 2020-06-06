@@ -46,8 +46,8 @@
     }
 
     const OnInput = function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
     }
 
     const replace = function (input) {
@@ -61,8 +61,8 @@
     }
 
     const renderTweets = function () {
-        const container = document.getElementById('output_container');
-        const textarea = document.getElementById('text_area');
+        const container = document.getElementById("output_container");
+        const textarea = document.getElementById("text_area");
         var input = textarea.value
 
         // clean container before re-rendering...
@@ -84,15 +84,15 @@
         // split input string into array of words
         input = input.split(" ")
 
-        var header = `[01/${String(divs).padStart(2, '0')}]\n`
+        var header = `[01/${String(divs).padStart(2, "0")}]\n`
         var tweet_text = header
         var tweets = []
         for (let index = 0; index < input.length; index++) {
             const word = input[index];
             if ((tweet_text.length + word.length) >= MAX_LENGTH) {
                 tweets.push(tweet_text)
-                var x = String(tweets.length + 1).padStart(2, '0')
-                var y = String(divs).padStart(2, '0')
+                var x = String(tweets.length + 1).padStart(2, "0")
+                var y = String(divs).padStart(2, "0")
                 header = `[${x}/${y}]\n`
                 tweet_text = header
             }
@@ -111,14 +111,14 @@
         }
     }
 
-    const replace_toggle = document.getElementById('replace_toggle');
-    replace_toggle.addEventListener('change', rerender);
-    const textarea = document.getElementById('text_area');
+    const replace_toggle = document.getElementById("replace_toggle");
+    const textarea = document.getElementById("text_area");
+    replace_toggle.addEventListener("change", rerender);
+    textarea.addEventListener("change", renderTweets);
     textarea.addEventListener("input", OnInput, false);
-    textarea.addEventListener('change', renderTweets);
-    textarea.addEventListener('input', renderTweets);
-    textarea.addEventListener('propertychange', renderTweets); // for IE8
-    textarea.setAttribute('style', 'height:' + (textarea.scrollHeight) + 'px;overflow-y:hidden;');
+    textarea.addEventListener("input", renderTweets);
+    textarea.addEventListener("propertychange", renderTweets); // for IE8
+    textarea.setAttribute("style", "height:" + (textarea.scrollHeight) + "px;overflow-y:hidden;");
 </script>
 
 
