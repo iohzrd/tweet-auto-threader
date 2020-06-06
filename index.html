@@ -15,12 +15,9 @@
 
 <body>
     <div class="container">
-
-
         <div class="tweet-box">
             <textarea class="tweet-input" id="text_area"></textarea>
         </div>
-
         <div class="row">
             <div class="col-sm">
                 compress:
@@ -42,7 +39,6 @@
                 </select>
             </div>
         </div>
-
         <div id="tweet_container" name="tweet_container">
         </div>
     </div>
@@ -60,7 +56,7 @@
     ]
     var stx_etx_idx = 0
 
-    const OnInput = function () {
+    const OnTextareaInput = function () {
         this.style.height = "auto";
         this.style.height = (this.scrollHeight) + "px";
     }
@@ -97,7 +93,6 @@
         }
 
         // grab label decorators from array
-        // TODO
         var stx = STX_ETX[stx_etx_idx].stx
         var etx = STX_ETX[stx_etx_idx].etx
 
@@ -161,13 +156,14 @@
     toggle_labels.addEventListener("change", renderTweets);
     const textarea = document.getElementById("text_area");
     textarea.addEventListener("change", renderTweets);
-    textarea.addEventListener("input", OnInput, false);
+    textarea.addEventListener("input", OnTextareaInput, false);
     textarea.addEventListener("input", renderTweets);
     // set default text, rerender and resize textarea
     textarea.value = "Those whom the gods wish to destroy, they first make mad. We must be mad, literally mad, as a nation to be permitting the annual inflow of some 50,000 dependents, who are for the most part the material of the future growth of the immigrant-descended population. It is like watching a nation busily engaged in heaping up its own funeral pyre. So insane are we that we actually permit unmarried persons to immigrate for the purpose of founding a family with spouses & fiances whom they have never seen."
     renderTweets()
     textarea.setAttribute("style", "height:" + (textarea.scrollHeight) + "px;overflow-y:hidden;");
 </script>
+<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
