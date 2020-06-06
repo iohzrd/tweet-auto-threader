@@ -7,29 +7,35 @@
     <title>Auto-thread</title>
     <script src="abbreviations.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="tweet-box">
-            <textarea class="tweet-input" id="text_area"></textarea>
-        </div>
+        <textarea class="materialize-textarea" id="text_area"></textarea>
+
         <div class="row">
-            <div class="col-sm-auto">
-                <label for="toggle_replace">compress:</label>
-                <input type="checkbox" id="toggle_replace" checked></input>
+            <div class="input-field col s12 m3">
+                <label>
+                    <input id="toggle_replace" type="checkbox" checked />
+                    <span>compress</span>
+                </label>
             </div>
-            <div class="col-sm-auto">
-                <label for="toggle_labels">labels:</label>
-                <input type="checkbox" id="toggle_labels" checked></input>
+
+            <div class="input-field col s12 m3">
+                <label>
+                    <input id="toggle_labels" type="checkbox" checked />
+                    <span>labels</span>
+                </label>
             </div>
-            <div class="col-sm-auto">
-                <label for="label_decorators">label decorators:</label>
+
+            <div class="input-field col s12 m3">
                 <select name="label_decorators" id="label_decorators">
-                    <option value="0">XX/XX</option>
+                    <option selected value="0">XX/XX</option>
                     <option value="1">*XX/XX*</option>
                     <option value="2">[XX/XX]</option>
                     <option value="3">{XX/XX}</option>
@@ -37,13 +43,17 @@
                     <option value="5">-XX/XX-</option>
                 </select>
             </div>
-            <div class="col-sm-auto">
-                <label for="label_decorators">dark theme:</label>
-                <input type="checkbox" id="toggle_dark" disabled></input>
+            <div class="input-field col s12 m3">
+                <select name="theme_selector" id="theme_selector">
+                    <option selected value="0">Light</option>
+                    <option value="1">Dark</option>
+                </select>
             </div>
         </div>
-        <div id="tweet_container" name="tweet_container">
-        </div>
+
+        <ul class="collection" id="tweet_container" name="tweet_container">
+        </ul>
+
     </div>
 </body>
 
@@ -143,10 +153,10 @@
 
         // append tweets to container
         for (i = 0; i < tweets.length; i++) {
-            var d = document.createElement("div");
-            d.innerText = tweets[i]
-            container.appendChild(document.createElement("br"));
-            container.appendChild(d);
+            var li = document.createElement("li");
+            li.innerText = tweets[i]
+            li.className = "collection-item"
+            container.appendChild(li);
         }
     }
 
@@ -164,17 +174,12 @@
     // set default text, rerender and resize textarea
     textarea.value = "Those whom the gods wish to destroy, they first make mad. We must be mad, literally mad, as a nation to be permitting the annual inflow of some 50,000 dependents, who are for the most part the material of the future growth of the immigrant-descended population. It is like watching a nation busily engaged in heaping up its own funeral pyre. So insane are we that we actually permit unmarried persons to immigrate for the purpose of founding a family with spouses & fiances whom they have never seen."
     renderTweets()
-    textarea.setAttribute("style", "height:" + (textarea.scrollHeight) + "px;overflow-y:hidden;");
+
+    // initialize materializecss
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
+    });
 </script>
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-    crossorigin="anonymous"></script>
 
 </html>
