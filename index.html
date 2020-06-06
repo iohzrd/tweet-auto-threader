@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Auto-thread</title>
+    <script src="replace.js"></script>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="tweet-box">
+        <textarea class="tweet-input" id="text_area"></textarea>
+    </div>
+
+    <div>
+        Optimize:
+        <label class="switch">
+            <input type="checkbox" id="replace-toggle">
+            <span class=" slider round"></span>
+        </label>
+    </div>
+
+    <div>
+        total characters: <div id="char_count"></div>
+    </div>
+    <div>
+        total tweets: <div id="tweet_count"></div>
+    </div>
+
+    <div id="output_container" name="output_container">
+
+    </div>
+</body>
+
+<script>
+    const MAX_LENGTH = 280
+
+    const textarea = document.getElementById('text_area');
+    const replace_toggle = document.getElementById('replace-toggle');
+    const char_count = document.getElementById('char_count');
+    const tweet_count = document.getElementById('tweet_count');
+    const container = document.getElementById('output_container');
+
+
+
+    const rerender = function (e) {
+        renderTweets()
+    }
+
+    const OnInput = function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+
+    const replace = function (input) {
+        for (const key in replace_list) {
+            if (replace_list.hasOwnProperty(key)) {
+                const value = replace_list[key];
+                input = input.split(key).join(value);
+            }
+        }
+        return input;
+    }
+
+    const renderTweets = function () {
+        var input = document.getElementById('text_area').value
+
+        // clean container before re-rendering...
+        while (container.firstChild) {
+            container.removeChild(container.lastChild);
+        }
+
+        // Replace all words if possible
+        if (document.getElementById("replace-toggle").checked) {
+            textarea.value = input = replace(input)
+        }
+
+        // indicators
+        var len = textarea.value.length
+        var offset = "[xx/xx]\n".length
+        var header_len = Math.ceil(len / MAX_LENGTH) * offset
+        var divs = Math.ceil((len + header_len) / MAX_LENGTH)
+        char_count.innerHTML = len;
+        tweet_count.innerHTML = divs;
+
+        // split input string into array of words
+        input = input.split(" ")
+
+        var header = `[01/${String(divs).padStart(2, '0')}]\n`
+        var tweet_text = header
+        var tweets = []
+        for (let index = 0; index < input.length; index++) {
+            const word = input[index];
+            if ((tweet_text.length + word.length) >= MAX_LENGTH) {
+                tweets.push(tweet_text)
+                var x = String(tweets.length + 1).padStart(2, '0')
+                var y = String(divs).padStart(2, '0')
+                header = `[${x}/${y}]\n`
+                tweet_text = header
+            }
+            tweet_text = tweet_text + word + " "
+        }
+        if (tweet_text.length > 6) {
+            tweets.push(tweet_text)
+            tweet_text = ""
+        }
+
+        for (i = 0; i < tweets.length; i++) {
+            var d = document.createElement("div");
+            d.innerText = tweets[i]
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+            container.appendChild(d);
+        }
+    }
+
+    replace_toggle.addEventListener('change', rerender);
+    textarea.addEventListener("input", OnInput, false);
+    textarea.addEventListener('change', renderTweets);
+    textarea.addEventListener('input', renderTweets);
+    textarea.addEventListener('propertychange', renderTweets); // for IE8
+    textarea.setAttribute('style', 'height:' + (textarea.scrollHeight) + 'px;overflow-y:hidden;');
+</script>
+
+
+</html>
