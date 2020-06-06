@@ -59,16 +59,19 @@
 
         // indicators
         var len = textarea.value.length
-        var offset = "[xx/xx]\n".length
-        var header_len = Math.ceil(len / MAX_LENGTH) * offset
-        var divs = Math.ceil((len + header_len) / MAX_LENGTH)
+        var offset = "[XX/XX]\n".length
+        var header_lens = Math.ceil(len / MAX_LENGTH) * offset
+        var divs = Math.ceil((len + header_lens) / MAX_LENGTH)
 
         // split input string into array of words
         input = input.split(" ")
 
+        // build initial header
         var header = `[01/${String(divs).padStart(2, "0")}]\n`
         var tweet_text = header
         var tweets = []
+        // construct strings of whole words that are less than 280 chars
+        // add strings to array
         for (let index = 0; index < input.length; index++) {
             const word = input[index];
             if ((tweet_text.length + word.length) >= MAX_LENGTH) {
@@ -80,11 +83,13 @@
             }
             tweet_text = tweet_text + word + " "
         }
+        // push leftover string
         if (tweet_text.length > 6) {
             tweets.push(tweet_text)
             tweet_text = ""
         }
 
+        // append tweets to container
         for (i = 0; i < tweets.length; i++) {
             var d = document.createElement("div");
             d.innerText = tweets[i]
