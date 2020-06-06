@@ -35,8 +35,8 @@
         <label for="toggle_labels">labels:</label>
         <input type="checkbox" id="toggle_labels" checked></input>
 
-        <label for="decorators">decorators:</label>
-        <select name="decorators" id="decorators">
+        <label for="label_decorators">label decorators:</label>
+        <select name="label_decorators" id="label_decorators">
             <option value="0">XX/XX</option>
             <option value="1">*XX/XX*</option>
             <option value="2">[XX/XX]</option>
@@ -79,9 +79,8 @@
     }
 
     const getDecoratorIndex = function () {
-        const decorators = document.getElementById("decorators");
-        console.log(decorators)
-        return decorators.options.selectedIndex
+        const label_decorators = document.getElementById("label_decorators");
+        return label_decorators.options.selectedIndex
 
     }
 
@@ -159,8 +158,8 @@
     }
 
     // setup event listeners
-    const decorators = document.getElementById("decorators");
-    decorators.addEventListener("change", renderTweets);
+    const label_decorators = document.getElementById("label_decorators");
+    label_decorators.addEventListener("change", renderTweets);
     const toggle_replace = document.getElementById("toggle_replace");
     toggle_replace.addEventListener("input", renderTweets);
     const toggle_labels = document.getElementById("toggle_labels");
