@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="container-sm">
+    <div class="container">
 
 
         <div class="tweet-box">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div id="output_container" name="output_container">
+        <div id="tweet_container" name="tweet_container">
         </div>
     </div>
 </body>
@@ -80,7 +80,7 @@
     }
 
     const renderTweets = function () {
-        const container = document.getElementById("output_container");
+        const container = document.getElementById("tweet_container");
         const textarea = document.getElementById("text_area");
         var input = textarea.value
 
