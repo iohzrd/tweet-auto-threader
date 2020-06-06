@@ -1,10 +1,12 @@
 const replace_list = {
     " and ": " & ",
+    " plus ": " + ",
     "And ": "& ",
     "I am ": "I'm ",
     "I don't care ": "IDC ",
     "I don't know ": "IDK",
     "Im ": "I'm ",
+    "Plus ": "+ ",
     "also known as ": "AKA",
     "altitude ": "alt. ",
     "anti fascist ": "antifa ",
@@ -76,7 +78,6 @@ const replace_list = {
     "over-time ": "OT ",
     "overtime ": "OT ",
     "payed time off ": "PTO ",
-    "plus ": "+ ",
     "point of view ": "POV ",
     "police department ": "PD ",
     "police dept ": "PD ",
@@ -95,7 +96,6 @@ const replace_list = {
     "word of mouth ": "WOM ",
     "work in progress ": "WIP ",
     "would have ": "would've ",
-    "you ": "you ",
     "you are ": "you're ",
     "youtube ": "YT ",
 }
