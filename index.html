@@ -28,16 +28,9 @@
     <div>
         Optimize:
         <label class="switch">
-            <input type="checkbox" id="replace-toggle">
+            <input type="checkbox" id="replace_toggle" checked>
             <span class=" slider round"></span>
         </label>
-    </div>
-
-    <div>
-        total characters: <div id="char_count"></div>
-    </div>
-    <div>
-        total tweets: <div id="tweet_count"></div>
     </div>
 
     <div id="output_container" name="output_container">
@@ -47,14 +40,6 @@
 
 <script>
     const MAX_LENGTH = 280
-
-    const textarea = document.getElementById('text_area');
-    const replace_toggle = document.getElementById('replace-toggle');
-    const char_count = document.getElementById('char_count');
-    const tweet_count = document.getElementById('tweet_count');
-    const container = document.getElementById('output_container');
-
-
 
     const rerender = function (e) {
         renderTweets()
@@ -76,7 +61,9 @@
     }
 
     const renderTweets = function () {
-        var input = document.getElementById('text_area').value
+        const container = document.getElementById('output_container');
+        const textarea = document.getElementById('text_area');
+        var input = textarea.value
 
         // clean container before re-rendering...
         while (container.firstChild) {
@@ -84,7 +71,7 @@
         }
 
         // Replace all words if possible
-        if (document.getElementById("replace-toggle").checked) {
+        if (document.getElementById("replace_toggle").checked) {
             textarea.value = input = replace(input)
         }
 
@@ -93,8 +80,6 @@
         var offset = "[xx/xx]\n".length
         var header_len = Math.ceil(len / MAX_LENGTH) * offset
         var divs = Math.ceil((len + header_len) / MAX_LENGTH)
-        char_count.innerHTML = len;
-        tweet_count.innerHTML = divs;
 
         // split input string into array of words
         input = input.split(" ")
@@ -122,13 +107,13 @@
             var d = document.createElement("div");
             d.innerText = tweets[i]
             container.appendChild(document.createElement("br"));
-            container.appendChild(document.createElement("br"));
-            container.appendChild(document.createElement("br"));
             container.appendChild(d);
         }
     }
 
+    const replace_toggle = document.getElementById('replace_toggle');
     replace_toggle.addEventListener('change', rerender);
+    const textarea = document.getElementById('text_area');
     textarea.addEventListener("input", OnInput, false);
     textarea.addEventListener('change', renderTweets);
     textarea.addEventListener('input', renderTweets);

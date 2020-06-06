@@ -1,8 +1,12 @@
 const replace_list = {
     "and": "&",
-    "plus": "+",
+    "can not": "can't",
+    "cannot": "can't",
     "do not": "don't",
-    "you are": "you're",
+    "it is": "it's",
     "never mind": "NVM",
     "nevermind": "NVM",
+    "plus": "+",
+    "work in progress": "WIP",
+    "you are": "you're",
 }
