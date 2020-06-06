@@ -29,10 +29,6 @@
 <script>
     const MAX_LENGTH = 280
 
-    const rerender = function (e) {
-        renderTweets()
-    }
-
     const OnInput = function () {
         this.style.height = "auto";
         this.style.height = (this.scrollHeight) + "px";
@@ -99,14 +95,14 @@
 
     const replace_toggle = document.getElementById("replace_toggle");
     const textarea = document.getElementById("text_area");
-    replace_toggle.addEventListener("change", rerender);
+    replace_toggle.addEventListener("change", renderTweets);
     textarea.addEventListener("change", renderTweets);
     textarea.addEventListener("input", OnInput, false);
     textarea.addEventListener("input", renderTweets);
     textarea.addEventListener("propertychange", renderTweets); // for IE8
     textarea.setAttribute("style", "height:" + (textarea.scrollHeight) + "px;overflow-y:hidden;");
     textarea.value = "The quick brown fox jumps over the lazy dog."
-    rerender()
+    renderTweets()
 </script>
 
 
