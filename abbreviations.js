@@ -22,6 +22,7 @@ const replace_list = {
     "for your Information ": "FYI ",
     "frequently asked question ": "FAQ ",
     "fuck the world ": "FTW ",
+    "i am ": "I'm ",
     "i don't care ": "IDC ",
     "i don't know ": "IDK",
     "i dont care ": "IDC ",
