@@ -28,13 +28,12 @@
     <div>
         Optimize:
         <label class="switch">
-            <input type="checkbox" id="replace_toggle" checked>
+            <input type="checkbox" id="replace_toggle" checked></input>
             <span class=" slider round"></span>
         </label>
     </div>
 
     <div id="output_container" name="output_container">
-
     </div>
 </body>
 
@@ -52,10 +51,8 @@
 
     const replace = function (input) {
         for (const key in replace_list) {
-            if (replace_list.hasOwnProperty(key)) {
-                const value = replace_list[key];
-                input = input.split(key).join(value);
-            }
+            const value = replace_list[key];
+            input = input.toLowerCase().split(key).join(value);
         }
         return input;
     }
@@ -119,6 +116,8 @@
     textarea.addEventListener("input", renderTweets);
     textarea.addEventListener("propertychange", renderTweets); // for IE8
     textarea.setAttribute("style", "height:" + (textarea.scrollHeight) + "px;overflow-y:hidden;");
+    textarea.value = "The quick brown fox jumps over the lazy dog."
+    rerender()
 </script>
 
 
