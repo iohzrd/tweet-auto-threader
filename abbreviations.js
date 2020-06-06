@@ -1,11 +1,12 @@
 const replace_list = {
+    " and ": " & ",
+    "And ": "& ",
     "I am ": "I'm ",
     "I don't care ": "IDC ",
     "I don't know ": "IDK",
     "Im ": "I'm ",
     "also known as ": "AKA",
     "altitude ": "alt. ",
-    "and ": "& ",
     "anti fascist ": "antifa ",
     "anti fascists ": "antifa ",
     "anti-fascist ": "antifa ",
